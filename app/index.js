@@ -45,6 +45,11 @@ Generator.prototype.askFor = function(first_argument) {
   console.log('Out of the box I include HTML5 Boilerplate, jQuery, Backbone.js and Modernizr.');
 
   var prompts = [{
+    name: 'appname',
+    message: 'What is the name of your application?',
+    default: this.appName
+  },
+  {
     name: 'compassBootstrap',
     message: 'Would you like to include Twitter Bootstrap for Sass?',
     default: 'Y/n',
@@ -67,6 +72,7 @@ Generator.prototype.askFor = function(first_argument) {
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
     this.compassBootstrap = (/y/i).test(props.compassBootstrap);
     this.includeRequireJS = (/y/i).test(props.includeRequireJS);
+	this.appname          = props.appname;
 
     cb();
   }.bind(this));
