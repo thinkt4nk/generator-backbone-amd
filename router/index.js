@@ -7,6 +7,17 @@ module.exports = Generator;
 
 function Generator() {
   generator.NamedBase.apply(this, arguments);
+
+  // inspect package.json for appname
+  try {
+    this.pkg = JSON.parse(this.readFileAsString(path.join(process.cwd(), 'package.json')));
+    this.appname = this.pkg.name;
+  }
+  catch (err) {
+    console.log('ERROR::',err);
+    // pass
+  }
+
   var dirPath = this.options.coffee ? '../templates/coffeescript/' : '../templates/javascript';
   this.sourceRoot(path.join(__dirname, dirPath));
   this.argument('model', { type: String, required: false });
